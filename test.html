@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ECMAScript面向对象编程</title>
+    <style>
+        html,body{
+            margin: 0;
+        }
+        .con{
+            width: 100%;
+            overflow: hidden;
+        }
+        .wrap{
+            width: 500%;
+            height: 400px;
+            display: flex;
+            transition: all 0.3s cubic-bezier(0.4, 0, 1, 1);
+        }
+        .wrap div{
+            width: 20%;
+            height: 400px;
+            display: inline-block;
+        }
+        .wrap div:nth-child(1){
+            background: green;
+        }
+        .wrap div:nth-child(2){
+            background: red;
+        }
+        .wrap div:nth-child(3){
+            background: yellow;
+        }
+        .wrap div:nth-child(4){
+            background: green;
+        }
+        .wrap div:nth-child(5){
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <chart>
+        <div></div>
+        <div></div>
+        <div></div>
+    </chart>
+    <div class="con">
+        <div class="wrap">
+            <div>
+                <h1>3</h1>
+            </div>
+            <div>
+                <h1>1</h1>
+            </div>
+            <div>
+                <h1>2</h1>
+            </div>
+            <div>
+                <h1>3</h1>
+            </div>
+            <div>
+                <h1>1</h1>
+            </div>
+        </div>
+    </div>
+    <script>
+        "use strict";
+        /**
+         * $(name)获取元素
+         * move()设置元素的移动
+         * hide()和show()显示和隐藏元素
+        */
+        var $ = name => {
+            if(document.querySelectorAll(name).length === 1){
+                return document.querySelector(name);
+            } else {
+                return document.querySelectorAll(name);
+            }
+        }
+        var move = function(obj,e){
+            obj.style.transform = `translateX(${e})`;
+        }
+        var hide = name => {
+            if(typeof $(name) === "Object"){
+                $(name).style.display = "none";
+            } else {
+                $(name).forEach(
+                    function(value){
+                        value.style.display = "none";
+                    }
+                );
+            }
+        }
+        var show = name => {
+            if(typeof $(name) === "Object"){
+                $(name).style.display = "";
+            } else {
+                $(name).forEach(
+                    function(value){
+                        value.style.display = "";
+                    }
+                );
+            }
+        }
+        var Mouse = function(data){
+            var temp = new Object;
+            temp.object = data.object;
+            temp.down = data.down;
+            temp.move = data.move;
+            temp.up = data.up;
+            temp.xyData = {
+                downX: 0,
+                moveX: 0,
+                dataX: 0,
+                flag: false
+            }
+            if("ontouchstart" in document.documentElement){
+                temp.object.addEventListener("touchstart",function(e){
+                    temp.xyData.downX = e.targetTouches[0].pageX;
+                    temp.xyData.moveX = 0;
+                    temp.down();
+                });
+                temp.object.addEventListener("touchmove",function(e){
+                    e.preventDefault();
+                    temp.xyData.moveX = e.targetTouches[0].pageX - temp.xyData.downX;//+ temp.xyData.dataX
+                    temp.move(temp.xyData.moveX);
+                });
+                temp.object.addEventListener("touchend",function(){
+                    temp.xyData.dataX = temp.xyData.moveX;
+                    temp.up(temp.xyData.moveX);
+                });
+                return temp;
+            }
+            temp.object.addEventListener("mousedown",function(e){
+                temp.xyData.downX = e.pageX;
+                temp.xyData.moveX = 0;
+                temp.xyData.flag = true;
+                temp.down();
+            });
+            window.addEventListener("mousemove",function(e){
+                if(!temp.xyData.flag){
+                    return;
+                }
+                e.preventDefault();
+                temp.xyData.moveX = e.pageX - temp.xyData.downX;//+ temp.xyData.dataX
+                temp.move(temp.xyData.moveX);
+            });
+            window.addEventListener("mouseup",function(){
+                if(!temp.xyData.flag){
+                    return;
+                }
+                temp.xyData.flag = false;
+                temp.xyData.dataX = temp.xyData.moveX;
+                temp.up(temp.xyData.moveX);
+            });
+            return temp;
+        }
+        move($(".wrap"),"-20%");
+        var index = 0;
+        var width = window.innerWidth;
+        var mouse = new Mouse(
+            {
+                object: $(".wrap"),
+                down: function(){
+                    if(index == 3){
+                        index = 0;
+                        this.object.style.transition = "none";
+                        move($(".wrap"),-(index + 1) * width + "px");
+                    }
+                    if(index == -1){
+                        index = 2;
+                        this.object.style.transition = "none";
+                        move($(".wrap"),-(index + 1) * width + "px");
+                    }
+                },
+                move: function(e){
+                    this.object.style.transition = "none";
+                    this.object.style.transform = `translateX(-${(index + 1) * width - e}px)`;
+                },
+                up: function(e){
+                    this.object.style.transition = "all 0.3s cubic-bezier(0.4, 0, 1, 1)";
+                    if(Math.abs(e) > 200){
+                        if(e > 0){
+                            index--;
+                        } else {
+                            index++;
+                        }
+                    } else {
+                        this.object.style.transition = "none";
+                    }
+                    move($(".wrap"),-(index + 1) * width + "px");
+                }
+            }
+        );
+        var Chart = function(data){
+            if(data.mode === "common"){
+                if(data.method === "{{chart}}"){
+                    var width = $("chart").offsetWidth,
+                    count = $("chart div").length;
+                    
+                }
+            }
+        }
+        var chart = new Chart({
+            mode: "common",
+            method: "{{chart}}"
+        });
+       /*//构造函数方式
+        var Ajax = function(data){
+            this.xmlhttp = new XMLHttpRequest();
+            this.xmlhttp.onreadystatechange = function(){
+                if(this.readyState == 4 && this.status == 200){
+                    if(data.type == "text"){
+                        data.result(this.responseText);
+                    } else if(data.type == "json"){
+                        data.result(this.responseText);
+                    }
+                }
+            }
+            this.xmlhttp.open(data.method,data.object,true);
+            this.xmlhttp.send(data.send);
+        }
+        var ajax = new Ajax(
+            {
+                object: "pings.php",
+                method: "GET",
+                send: "",
+                type: "text",
+                result: function(text){
+                    alert(text);
+                }
+            }
+        );*/
+    </script>
+</body>
+</html>

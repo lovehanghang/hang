@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>航航网音乐</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <link rel="stylesheet" href="mobile.css?v=44" />
+        <script src="base.js"></script>
+    </head>
+    <body>
+        <div class="player">
+            <div class="con">
+                <div class="user">
+                    <a href="" class="user_login"><p>登录</p></a>
+                </div>
+                <div class="cd">
+                    <img src="app.jpg" />
+                </div>
+                <div class="ping">
+                    <img src="app.jpg" alt="">
+                    <a href=""><p>航航网音乐</p></a>
+                </div>
+                <div class="copy">
+                    <h3 class="copy_name">你从未离去</h3>
+                    <p class="copy_singer">白挺</p>
+                </div>
+                <div class="cansee">
+                    <div class="passage">
+                        
+                    </div>
+                </div>
+                <div class="im">
+                    <div class="row">
+                        <p class="now">00:00</p>
+                        <div class="co">
+                            <div class="jin">
+                                <span>
+                                    <i></i>
+                                </span>
+                            </div>
+                        </div>
+                        <p class="allTime"></p>
+                    </div>
+                    
+                    <div class="play">
+                        <i></i>
+                        <i></i>
+                        <i></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="login">
+            <h3>登录</h3>
+            <form action="">
+                <div>
+                    <input type="text" class="username" required="required">
+                    <p>账号</p>
+                    <span class="de"></span>
+                </div>
+                <div>
+                    <input type="text" class="key" required="required">
+                    <p>密码</p>
+                    <span class="de"></span>
+                </div>
+                <button type="button" id="login"><p>登录</p></button>
+            </form>
+        </div>
+        <div class="ping_real">
+            <h3>全部评论</h3>
+            <!--<form action="">
+                <input type="text">
+                <button type="button">评论</button>
+            </form>-->
+        </div>
+        <script>
+            function service(){
+                var xmlhttp;
+                var data1 = document.querySelector(".username").value;
+                var data2 = document.querySelector(".key").value;
+                if(data1 == ""){
+
+                }
+                var txt = "name=" + data1 + "&key=" + data2;
+                if(window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function(){
+                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                        var con = '<div><img src="icon1.png"><p>登录成功</p></div>';
+                        var result = {
+                            "账号或密码错误": function(){
+                                con = '<div><img src="icon2.png"><p>账号或密码错误</p></div>';
+                            },
+                            "验证不通过": function(){
+                                con = '<div><img src="icon2.png"><p>验证不通过</p></div>';
+                            }
+                        }
+                        const resultText = xmlhttp.responseText.split("&&");
+                        if(result[resultText[0]]){
+                            result[resultText[0]]();
+                        }
+                        if(result[resultText[0]]){
+                            result[resultText[0]]();
+                        }
+                        var ipt = document.createElement("div");
+                        ipt.classList.add("message");
+                        ipt.innerHTML = con;
+                        document.body.appendChild(ipt);
+                        $(".login").style.transform = "translateY(100%)";
+                        data1 = "";
+                        data2 = "";
+                        if(resultText[1]){
+                            const resultJson = eval("(" + resultText[1] + ")");
+                            $(".user_login p").innerHTML = resultJson.name;
+                        }
+                        setTimeout(function(){
+                            document.body.removeChild(ipt);
+                        },2000);
+                    }
+                }
+                xmlhttp.open("POST","key.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send(txt);
+            }
+        </script>
+        <div class="app"></div>
+        <script src="player.js"></script>
+        <audio src="app.m4a"></audio>
+        <script src="mobile.js?v=8"></script>
+    </body>
+</html>

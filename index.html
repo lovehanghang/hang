@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>航航网音乐</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width" />
+        <meta name="renderer" content="webkit" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <script src="base.js"></script>
+        <link rel="stylesheet" href="app.css" />
+    </head>
+    <body>
+        <div class="player">
+            <h1>
+                <a href="">航航音乐</a>
+            </h1>
+            <div class="login">
+                <a href="javascript:ui();">
+                    <p>登录</p>
+                </a>
+            </div>
+            <div class="con">
+                <div class="console">
+                    <div>
+                        <a href="">收藏</a>
+                        <a href="">添加到</a>
+                        <a href="">下载</a>
+                        <a href="">删除</a>
+                        <a href="">清空列表</a>
+                    </div>
+                    <div class="list">
+                        <div class="lists">
+                            <ul class="lists_header">
+                                <li class="border" onclick="chek(-1)"><input type="checkbox" name="" id=""></li>
+                                <span class="number"></span>
+                                <li class="song">歌曲</li>
+                                <li class="singer">歌手</li>
+                                <li>时长</li>
+                            </ul>
+                            <ul class="lists_son">
+                                <li class="border" onclick="chek(1)"><input type="checkbox" name="" id=""></li>
+                                <span class="number">1</span>
+                                <li class="song">
+                                    <p>你从未离去</p>
+                                    <div class="s_menu">
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                    </div>
+                                </li>
+                                <li class="singer">白挺</li>
+                                <li>
+                                    <p>03:43</p>
+                                    <a href="" class="delate_a"><i class="delate"></i></a>
+                                </li>
+                            </ul>
+                            <ul class="lists_son">
+                                <li class="border" onclick="chek(1)"><input type="checkbox" name="" id=""></li>
+                                <span class="number">1</span>
+                                <li class="song">
+                                    <p>你从未离去</p>
+                                    <div class="s_menu">
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                    </div>
+                                </li>
+                                <li class="singer">白挺</li>
+                                <li>
+                                    <p>03:43</p>
+                                    <a href="" class="delate_a"><i class="delate"></i></a>
+                                </li>
+                            </ul>
+                            <ul class="lists_son">
+                                <li class="border" onclick="chek(1)"><input type="checkbox" name="" id=""></li>
+                                <span class="number">1</span>
+                                <li class="song">
+                                    <p>你从未离去</p>
+                                    <div class="s_menu">
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                    </div>
+                                </li>
+                                <li class="singer">白挺</li>
+                                <li>
+                                    <p>03:43</p>
+                                    <a href="" class="delate_a"><i class="delate"></i></a>
+                                </li>
+                            </ul>
+                            <ul class="lists_son">
+                                <li class="border" onclick="chek(1)"><input type="checkbox" name="" id=""></li>
+                                <span class="number">1</span>
+                                <li class="song">
+                                    <p>你从未离去</p>
+                                    <div class="s_menu">
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                        <a href=""><i></i></a>
+                                    </div>
+                                </li>
+                                <li class="singer">白挺</li>
+                                <li>
+                                    <p>03:43</p>
+                                    <a href="" class="delate_a"><i class="delate"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sing">
+                    <div class="cd">
+                        <img src="app.webp" loading="lazy" />
+                    </div>
+                    <div class="copy">
+                        <p>歌曲名：<a href="" class="copy_name">你从未离去</a></p>
+                        <p>歌手：<a href="" class="copy_singer">白挺</a></p>
+                        <p>专辑：<a href="">你从未离去</a></p>
+                    </div>
+                    <div class="cansee">
+                        <div class="passage" onselectstart="return false;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="im">
+                <div class="play">
+                    <a href=""></a>
+                    <a href="javascript:play();"></a>
+                    <a href=""></a>
+                </div>
+                <div class="time">
+                    <p><a href="">你从未离去</a> - <a href="">白挺</a></p>
+                    <p class="long"><span class="now">00:00</span> / <span class="allTime"></span></p>
+                    <div class="rect">
+                        <span><i></i></span>
+                    </div>
+                </div>
+                <div class="menu">
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href=""></a>
+                    <a href="javascript:easy()"></a>
+                    <div class="sound">
+                        <a href=""></a>
+                        <div class="rect_s">
+                            <span>
+                                <i></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="app">
+        </div>
+        <div class="real_mask"></div>
+        <div class="mask">
+        <div class="alert">
+            <div class="top">
+                <a href="">
+                    <p class="chose">登录</p>
+                </a>
+                <a href="">
+                    <p>注册</p>
+                </a>
+            </div>
+            <div class="middle">
+                <p class="m_welcome">欢迎登录航航网音乐</p>
+                <form action="">
+                    <input type="text" class="data1" placeholder="账号">
+                    <input type="text" class="data2" placeholder="密码">
+                    <button type="button" id="login">
+                        <p>登录</p>
+                    </button>
+                </form>
+            </div>
+        </div>
+        </div>
+        <div class="talking">
+            <div class="pl">
+                <div class="real">
+                    <p>全部评论</p>
+                    <div class="row">
+                        <img src="app.webp" alt="">
+                        <div class="conn">
+                            <p class="data"><span>航航</span><span>2022.08.28</span></p>
+                            <p class="content">评论内容</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="send">
+                    <input type="text">
+                    <button>发送</button>
+                </div>
+            </div>
+        </div>
+        <div class="message">
+            <div class="style1">
+                <img src="icon1.png" />
+                <p></p>
+            </div>
+            <div class="style2">
+                <img src="icon2.png" />
+                <p></p>
+            </div>
+        </div>
+        <script>
+            function service(){
+                var data1 = document.querySelector(".data1").value;
+                var data2 = document.querySelector(".data2").value;
+                txt = "ticket=" + ticket + "&rand=" + rand + "&name=" + data1 + "&key=" + data2;
+                var xmlhttp;
+                if(window.XMLHttpRequest){
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function(){
+		            if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                        var result = xmlhttp.responseText.split("&&");
+                        if(result[0] == "验证不通过"){
+                            hidden(".style1");
+                            $(".message").style.display = "block";
+                            $(".style2 p").innerHTML = "验证不通过";
+                            setTimeout(function(){
+                                $(".message .style2").style.transform = "translateY(-110px)";
+                            },2000);
+                            setTimeout(function(){
+                                $(".message .style2").style.transform = "translateY(0)";
+                                $(".style1").style.display = "inline-flex";
+                                hidden(".message");
+                            },2500);
+                            return;
+                        }
+                        if(result[0] == "密码错误"){
+                            hidden(".style1");
+                            $(".message").style.display = "block";
+                            $(".style2 p").innerHTML = "密码错误";
+                            setTimeout(function(){
+                                $(".message .style2").style.transform = "translateY(-110px)";
+                            },2000);
+                            setTimeout(function(){
+                                $(".message .style2").style.transform = "translateY(0)";
+                                $(".style1").style.display = "inline-flex";
+                                hidden(".message");
+                            },2500);
+                            return;
+                        }
+                        loginId = result[0];
+                        userData = result[1];
+                        hidden(".style2");
+                        $(".message").style.display = "block";
+                        $(".style1 p").innerHTML = "登录成功";
+                        hidden(".mask");
+                        hidden(".real_mask");
+                        setTimeout(function(){
+                            $(".message .style1").style.transform = "translateY(-110px)";
+                        },2000);
+                        setTimeout(function(){
+                            $(".message .style1").style.transform = "translateY(0)";
+                            hidden(".message");
+                            $(".style2").style.display = "inline-flex";
+                            
+                        },2500);
+                    }
+	            }
+                xmlhttp.open("POST","key.php",true);
+                xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+                xmlhttp.send(txt);
+            }
+            var getInfo = new Ajax(
+                {
+                    open: "pings.php",
+                    method: "POST",
+                    send: "",
+                    result: function(text){
+                        alert(text);
+                    }
+                }
+            )
+        </script>
+        <script src="player.js"></script>
+        <audio src="app.m4a"></audio>
+        <script src="app.js"></script>
+    </body>
+</html>
