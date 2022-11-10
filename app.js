@@ -1,6 +1,7 @@
 const audio = $("audio"),play_icon = $(".im .play a:nth-child(2)"),now = $(".now");
 var timer;
 (function(){
+    //处理音频文件
     audio.addEventListener("loadedmetadata",function(){
         $(".allTime").innerHTML = About(audio.duration);
         this.volume = "0.4";
@@ -213,6 +214,7 @@ $(".menu a:nth-child(4)").addEventListener("click",function(e){
     }
 });
 var easy_f = false;
+//纯净模式
 function easy(){
     if(!easy_f){
         hidden(".console");
