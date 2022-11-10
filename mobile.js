@@ -1,22 +1,23 @@
 const audio = $("audio"),start = $(".play i:nth-child(2)"),passage = $(".passage"),now = $(".now");
 audio.addEventListener("loadedmetadata",function(){
-    if(audio.duration != 0){
-        //处理浏览器兼容问题
-        audio.play();
-        audio.pause();
+    if(this.duration != 0){
+        $(".allTime").innerHTML = About(this.duration);
+    } else {
+        this.addEventListener("play",function(){
+            $(".allTime").innerHTML = About(this.duration);
+        })
     }
-    $(".allTime").innerHTML = About(audio.duration);
-    audio.volume = "1";
+    this.volume = 1;
 });
 $(".login").style.top = window.innerHeight - 400 + "px";
 var timer;
 start.addEventListener("click",function(){
     if(audio.played.length === 0 || audio.paused){
         audio.play();
-        start.style.backgroundImage = "url(playing.png)";
+        this.style.backgroundImage = "url(playing.png)";
     } else {
         audio.pause();
-        start.style.backgroundImage = "url(play.png)";
+        this.style.backgroundImage = "url(play.png)";
     }
 });
 audio.addEventListener("play",function(){
@@ -87,16 +88,16 @@ $(".user_login").addEventListener("click",function(e){
         if(useY < 0){
             return;
         }
-        $(".login").style.transition = "none";
-        $(".login").style.transform = `translateY(${useY}px)`;
+        this.style.transition = "none";
+        this.style.transform = `translateY(${useY}px)`;
         dataY = e.targetTouches[0].pageY;
     });
     $(".login").addEventListener("touchend",function(){
-        $(".login").style.transition = "all 0.3s";
+        this.style.transition = "all 0.3s";
         if(useY > 110){
-            $(".login").style.transform = "translateY(100%)";
+            this.style.transform = "translateY(100%)";
         } else {
-            $(".login").style.transform = "translateY(0)";
+            this.style.transform = "translateY(0)";
         }
         dataY = 0;
         useY = 0;
@@ -147,10 +148,10 @@ function getPings(){
         xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
     xmlhttp.onreadystatechange = function(){
-        if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        if (this.readyState === 4 && this.status === 200){
             $(".ping_real").innerHTML = "<h3>全部评论</h3>";
-            result_json = eval(`(${xmlhttp.responseText})`);
-            result_json.content.forEach(function(value,index){
+            result_json = eval(`(${this.responseText})`);
+            result_json.content.forEach(function(value){
                 value = eval(`(${value})`);
                 $(".ping_real").innerHTML += `<div class="userPing"><img src="app.webp" alt=""><div class="content"><p class="userData"><span>${value.name}</span><span>2022.10.10</span></p><p>${value.content}</p></div></div>`;
             });
