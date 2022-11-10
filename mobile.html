@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
     <head>
         <title>航航网音乐</title>
         <meta charset="UTF-8" />
@@ -75,20 +75,20 @@
         </div>
         <script>
             function service(){
-                var xmlhttp;
-                var data1 = document.querySelector(".username").value;
-                var data2 = document.querySelector(".key").value;
+                let xmlhttp;
+                var data1 = document.querySelector(".username").value,
+                data2 = document.querySelector(".key").value;
                 if(data1 == ""){
 
                 }
-                var txt = "name=" + data1 + "&key=" + data2;
+                let txt = "name=" + data1 + "&key=" + data2;
                 if(window.XMLHttpRequest){
                     xmlhttp = new XMLHttpRequest();
                 } else {
-                    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
                 }
                 xmlhttp.onreadystatechange = function(){
-                    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+                    if (xmlhttp.readyState ==+ 4 && xmlhttp.status ==+ 200){
                         var con = '<div><img src="icon1.png"><p>登录成功</p></div>';
                         var result = {
                             "账号或密码错误": function(){
@@ -105,7 +105,7 @@
                         if(result[resultText[0]]){
                             result[resultText[0]]();
                         }
-                        var ipt = document.createElement("div");
+                        let ipt = document.createElement("div");
                         ipt.classList.add("message");
                         ipt.innerHTML = con;
                         document.body.appendChild(ipt);

@@ -330,6 +330,7 @@ a{
     border-radius: 20px 20px 0 0;
     transition: all 0.2s;
     transform: translateY(100%);
+    opacity: 0.92;
 }
 .ping_real h3{
     margin-left: 20px;
@@ -337,7 +338,7 @@ a{
 }
 .userPing{
     margin-left: 30px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 .userPing img{
     width: 25px;

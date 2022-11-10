@@ -1,6 +1,12 @@
 var width = window.innerWidth + "px",
     height = window.innerHeight + "px";
-var $ = name => document.querySelector(name);
+var $ = name => {
+    if(document.querySelectorAll(name).length === 1){
+        return document.querySelector(name);
+    } else {
+        return document.querySelectorAll(name);
+    }
+};
 var hidden = name => document.querySelector(name).style.display = "none";
 var getObj = function(obj){
     this.obj = obj;

@@ -1,46 +1,41 @@
-//更新于2022年10月31日
 const audio = $("audio"),start = $(".play i:nth-child(2)"),passage = $(".passage"),now = $(".now");
 audio.addEventListener("loadedmetadata",function(){
     if(audio.duration != 0){
-        $(".allTime").innerHTML = About(audio.duration);
-    } else {
-        $(".allTime").innerHTML = "03:43";
+        //处理浏览器兼容问题
+        audio.play();
+        audio.pause();
     }
+    $(".allTime").innerHTML = About(audio.duration);
     audio.volume = "1";
 });
 $(".login").style.top = window.innerHeight - 400 + "px";
-var isPlay,isPause;
 var timer;
 start.addEventListener("click",function(){
-    if(!isPlay){
+    if(audio.played.length === 0 || audio.paused){
         audio.play();
         start.style.backgroundImage = "url(playing.png)";
-        isPlay = true;
     } else {
         audio.pause();
         start.style.backgroundImage = "url(play.png)";
-        isPlay = false;
     }
 });
 audio.addEventListener("play",function(){
-    isPause = false;
     timer = setInterval(function(){
         Word();
     },1000);
 });
 audio.addEventListener("pause",function(){
-    isPause = true;
     clearInterval(timer);
 });
 function Word(){
     Time.forEach(function(value,index,array){
         if(audio.currentTime >= value && audio.currentTime < array[index+1]
             || audio.currentTime >= value && index == array.length - 1){
-            document.querySelectorAll(".passage p").forEach(function(value){
+            $(".passage p").forEach(function(value){
                 value.style.color = "white";
             });
-            document.querySelectorAll(".passage p")[index].style.color = "orange";
-            passage.style.transform = "translateY(-" + 27 * index + "px)";
+            $(".passage p")[index].style.color = "orange";
+            passage.style.transform = `translateY(-${27 * index}px)`;
             span.style.width = audio.currentTime / audio.duration * jin.offsetWidth + "px";
             now.innerHTML = About(audio.currentTime);
         }
@@ -62,7 +57,7 @@ const jin = $(".jin"),span = $(".jin span");
     jin.addEventListener("touchend",function(){
         audio.currentTime = span.offsetWidth / jin.offsetWidth * audio.duration;
         Word();
-        if(!isPause){
+        if(audio.played.length != 0 && !audio.paused){
             timer = setInterval(function(){
                 Word();
             },1000);
@@ -93,7 +88,7 @@ $(".user_login").addEventListener("click",function(e){
             return;
         }
         $(".login").style.transition = "none";
-        $(".login").style.transform = "translateY(" + useY + "px)";
+        $(".login").style.transform = `translateY(${useY}px)`;
         dataY = e.targetTouches[0].pageY;
     });
     $(".login").addEventListener("touchend",function(){
@@ -120,7 +115,7 @@ $(".user_login").addEventListener("click",function(e){
             return;
         }
         obj.style.transition = "none";
-        obj.style.transform = "translateY(" + useY + "px)";
+        obj.style.transform = `translateY(${useY}px)`;
         dataY = e.targetTouches[0].pageY;
     });
     obj.addEventListener("touchend",function(){
@@ -149,15 +144,15 @@ function getPings(){
     if(window.XMLHttpRequest){
         xmlhttp = new XMLHttpRequest();
     } else {
-        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
     }
     xmlhttp.onreadystatechange = function(){
         if (xmlhttp.readyState==4 && xmlhttp.status==200){
             $(".ping_real").innerHTML = "<h3>全部评论</h3>";
-            result_json = eval("(" + xmlhttp.responseText + ")");
+            result_json = eval(`(${xmlhttp.responseText})`);
             result_json.content.forEach(function(value,index){
-                value = eval("(" + value + ")");
-                $(".ping_real").innerHTML += '<div class="userPing"><img src="app.webp" alt=""><div class="content"><p class="userData"><span>'+value.name+'</span><span>2022.10.10</span></p><p>'+value.content+'</p></div></div>';
+                value = eval(`(${value})`);
+                $(".ping_real").innerHTML += `<div class="userPing"><img src="app.webp" alt=""><div class="content"><p class="userData"><span>${value.name}</span><span>2022.10.10</span></p><p>${value.content}</p></div></div>`;
             });
         }
     }
